@@ -1,4 +1,5 @@
 var express = require('express');
+var session = require('express-session');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
@@ -7,15 +8,18 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var passport = require('passport');
 
+
 // Importamos el modelo usuario y la configuración de passport
 require('./models/user');
 require('./passport')(passport);
 
+
 // Conexión a la base de datos
-mongoose.connect('mongodb://localhost:37017/gastos', function(err,res){
+mongoose.connect('mongodb://localhost:27017/gastos', function(err,res){
 	if (err) throw(err);
 	console.log('Conectado con éxito a la BD');
 });
+
 
 var index = require('./routes/index');
 var users = require('./routes/users');
@@ -33,15 +37,23 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+var MemoryStore =session.MemoryStore;
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
 app.use('/users', users);
+
 // sesiones
-app.use(express.session({ secret: 'ajkhdasd' }));
+//app.use(express.session({ secret: 'ajkhdasd' })); --> no funciona
+app.use(session({
+        name : 'app.sid',
+        secret: "1jcgm2jgm3mma4rgc_2013",
+        resave: true,
+        store: new MemoryStore(),
+        saveUninitialized: true
+}));
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(app.router);
 
 // ruta para autenticarse con Twitter
 app.get('/auth/twitter',passport.authenticate('twitter'));
