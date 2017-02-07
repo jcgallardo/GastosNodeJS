@@ -1,9 +1,7 @@
-var express = require('express');
-var router = express.Router();
+// Rutas de la aplicación
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Control de Gastos 2.0' , user: req.user});
-});
-
-module.exports = router;
+exports.index = function(req, res){
+  // Renderiza la plantilla 'index' cuando en el navegador
+  // nos encontremos en la raiz '/' --> http://localhost:puerto/
+  res.render('index', { title: 'Ejemplo de Passport JS', user: req.user });
+};
