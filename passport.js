@@ -52,13 +52,13 @@ module.exports = function(passport) {
 			});
 		});
 	}));
-	
+
 	// Configuración del autenticado para Facebook
 	passport.use(new FacebookStrategy({
 		clientID		: config.facebook.id,
 		clientSecret	: config.facebook.secret,
 		callbackURL		: '/auth/facebook/callback',
-		profileFields	: ['id','displayName','photos']
+		profileFields	: ['id','displayName','photos','emails']
 	}, function(accessToken, refreshToken, profile, done){
 		User.findOne({provider_id:profile.id},function(err,user){
 			if (err) throw(err);
@@ -67,7 +67,8 @@ module.exports = function(passport) {
 				provider_id		: profile.id,
 				provider		: profile.provider,
 				name			: profile.displayName,
-				photo			: profile.photos[0].value
+				photo			: profile.photos[0].value,
+				email			: profile.emails[0].value
 			});
 			user.save(function(err){
 				if (err) throw(err);
@@ -75,7 +76,7 @@ module.exports = function(passport) {
 			});
 		});
 	}));
-	
-	
-	
+
+
+
 }

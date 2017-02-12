@@ -12,7 +12,8 @@ var UserSchema = new Schema({
 	//provider		: String, // Cuenta del usuario (Twitter o Facebook en este ejemplo)
 	provider_id : {type: String, unique: true}, // ID que proporciona Twitter o Facebook
 	photo			 : String, // Avatar o foto del usuario
-	createdAt	 : {type: Date, default: Date.now} // Fecha de creación
+	createdAt	 : {type: Date, default: Date.now}, // Fecha de creación
+	email		: String
 });
 
 // Exportamos el modelo 'User' para usarlo en otras
