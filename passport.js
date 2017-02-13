@@ -4,6 +4,9 @@ var User = mongoose.model('User');
 var TwitterStrategy = require('passport-twitter').Strategy;
 // Estrategia de autenticación con Facebook
 var FacebookStrategy = require('passport-facebook').Strategy;
+// Estrategia de autenticación con Google
+var GoogleStrategy = require('passport-google-oauth2' ).Strategy;
+
 // Fichero de configuración donde se encuentran las API keys
 // Este archivo no debe subirse a GitHub ya que contiene datos
 // que pueden comprometer la seguridad de la aplicación.
@@ -44,6 +47,7 @@ module.exports = function(passport) {
 				provider		 : profile.provider,
 				name				 : profile.displayName,
 				photo				: profile.photos[0].value
+				// ¡¡ Extracción de email no implementada !!
 			});
 			//...y lo almacena en la base de datos
 			user.save(function(err) {
@@ -76,6 +80,31 @@ module.exports = function(passport) {
 			});
 		});
 	}));
+
+	// Configuración del autenticado para Google
+	passport.use(new GoogleStrategy({
+	    clientID:     config.google.id,
+	    clientSecret: config.google.secret,
+	    callbackURL: '/auth/google/callback'
+  	},
+  	function(request, accessToken, refreshToken, profile, done) {
+    	User.findOne({ provider_id: profile.id }, function (err, user) {
+			if (err) throw(err);
+			if (!err && user!=null) return done(null,user);
+			var user = new User({
+				provider_id		: profile.id,
+				provider		: profile.provider,
+				name			: profile.displayName,
+				photo			: profile.photos[0].value,
+				email			: profile.emails[0].value
+			});
+			user.save(function(err){
+				if (err) throw(err);
+				done(null,user);
+			});
+    	});
+  }
+));
 
 
 

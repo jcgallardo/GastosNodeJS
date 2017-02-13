@@ -61,6 +61,11 @@ app.get('/logout', function(req, res) {
 app.get('/auth/twitter', passport.authenticate('twitter'));
 // Ruta para autenticarse con Facebook (enlace de login)
 app.get('/auth/facebook', passport.authenticate('facebook', { scope: 'email'}));
+// Ruta para autenticarse con Google (enlace de login)
+app.get('/auth/google', passport.authenticate('google', {
+     scope:[ 'https://www.googleapis.com/auth/plus.login',
+      'https://www.googleapis.com/auth/plus.profile.emails.read' ]
+}));
 // Ruta de callback, a la que redirigirá tras autenticarse con Twitter.
 // En caso de fallo redirige a otra vista '/login'
 app.get('/auth/twitter/callback', passport.authenticate('twitter',
@@ -69,6 +74,11 @@ app.get('/auth/twitter/callback', passport.authenticate('twitter',
 // Ruta de callback, a la que redirigirá tras autenticarse con Facebook.
 // En caso de fallo redirige a otra vista '/login'
 app.get('/auth/facebook/callback', passport.authenticate('facebook',
+  { successRedirect: '/', failureRedirect: '/login' }
+));
+// Ruta de callback, a la que redirigirá tras autenticarse con Google.
+// En caso de fallo redirige a otra vista '/login'
+app.get('/auth/google/callback', passport.authenticate( 'google',
   { successRedirect: '/', failureRedirect: '/login' }
 ));
 
