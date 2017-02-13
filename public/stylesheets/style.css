@@ -3,10 +3,12 @@ html, body{
 	height: 100%;
 	padding:0;
 	margin: 0;
+	font-size: 14px;
+	background-color: #EEEEEE;
 }
 body {
   	font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-	background-color: orange;
+	background-color: #EEEEEE !important;
 }
 ul li{
 	list-style: none;
@@ -48,6 +50,8 @@ header > ul li{
 .boton-salir{
 	color: white;
 	font-weight: 800;
+	border-left: 1px solid white;
+	padding-left: 20px;
 }
 .cont-login{
 	margin:auto;
@@ -74,10 +78,42 @@ header > ul li{
 li > p{
 	font-size: 15px;
 }
-.tit-infor{
+h1.saludo{
 	text-align: center;
-	font-size: 72px;
-	margin-top: 200px;
+	font-size: 5em;
+	margin-top: 120px;
 	font-family: sans-serif;
 }
-
+p.saludo{
+	font-size: 2.5em;
+	text-align: center;
+	color:#888;
+	font-weight: 100;
+	font-family: monospace;
+	margin-top:20px;
+}
+.btn-nuevo{
+	text-align: center;
+}
+.fila-boton{
+	text-align: center;
+}
+.cont-form{
+	margin-top: 50px;
+	background-color:white;
+	padding:40px !important;
+	border-radius: 10px;
+	box-shadow: 0 2px 5px 1px rgba(200,100,20,0.3);
+}
+.cont-form label{
+	font-size:16px !important;
+}
+.cont-form .row{
+	padding: 10px !important;
+}
+footer{
+	background-color: #222;
+	color:white;
+	padding:50px;
+	margin-top:100px;
+}
