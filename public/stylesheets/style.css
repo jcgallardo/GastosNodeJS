@@ -38,6 +38,14 @@ header > ul li{
 	vertical-align: middle;
 	margin: 0 10px;
 }
+footer{
+	background-color: #222;
+	color:white;
+	padding:50px;
+}
+section{
+	padding-bottom: 100px;
+}
 .marco-foto{
 	padding:2px;
 }
@@ -58,7 +66,7 @@ header > ul li{
 	padding:30px !important;
 	box-shadow: 1px 1px 5px 1px rgba(0,0,0,0.3);
 	background-color:white;
-	max-width: 480px;
+	max-width: 680px;
 }
 .lista-inicio-sesion{
 	margin:0;
@@ -70,6 +78,7 @@ header > ul li{
 .div-fondo{
 	min-height: 100%;
 	padding-top:7%;
+	padding-bottom: 120px;
 	background-image: url('../images/fondo.jpg');
 	background-position: center;
 	background-size: cover;
@@ -111,9 +120,36 @@ p.saludo{
 .cont-form .row{
 	padding: 10px !important;
 }
-footer{
-	background-color: #222;
+.cont-publicidad{
+	margin: 50px auto;
+	min-width: 80%;
+	padding:20px;
+}
+.cont-publicidad h2{
+	color: #E57373;
+	font-size: 36px;
+	margin-bottom: 40px;
+}
+.publicidad h3{
+	font-size: 24px;
+	text-align: center;
+}
+.publicidad p{
+	font-size: 16px;
+	line-height: 24px;
+	color:#555;
+}
+.titulo{
+	color:#E57373;
+	text-shadow: 1px 1px 3px black;
+	font-size:72px;
+	margin-left: 10%;
+}
+.subtitulo{
+	color: white;
+	text-shadow: 1px 1px 5px black;
+	font-size:40px;
 	color:white;
-	padding:50px;
-	margin-top:100px;
+	margin-left: 15%;
+	margin-bottom:80px;
 }
