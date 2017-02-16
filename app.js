@@ -4,13 +4,19 @@
 var express = require('express'); // Express: Framework HTTP para Node.js
 var routes = require('./routes'); // Dónde tenemos la configuración de las rutas
 var path = require('path');
-
 var mongoose = require('mongoose'); // Mongoose: Libreria para conectar con MongoDB
 var passport = require('passport'); // Passport: Middleware de Node que facilita la autenticación de usuarios
+var bodyParser      = require("body-parser");
+var cookieParser    = require("cookie-parser");
+var methodOverride  = require("method-override");
 
 // Importamos el modelo usuario y la configuración de passport
 require('./models/user');
 require('./passport')(passport);
+
+// importamos los controladores para la API
+require('./models/gasto');
+var GastoCtrl = require('./controllers/gastos');
 
 // Conexión a la base de datos de MongoDB que tenemos en local
 mongoose.connect('mongodb://localhost:27017/gastos', function(err, res) {
@@ -28,11 +34,12 @@ app.set('view engine', 'jade');
 
 // Ruta de los archivos estáticos (HTML estáticos, JS, CSS,...)
 app.use(express.static(path.join(__dirname, 'public')));
-// Indicamos que use sesiones, para almacenar el objeto usuario
-// y que lo recuerde aunque abandonemos la página
-app.use(require('cookie-parser')());
-app.use(require('body-parser').urlencoded({ extended: true }));
+app.use(cookieParser());
 app.use(require('express-session')({ secret: 'keyboard cat', resave: true, saveUninitialized: true }));
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
+//app.use(methodOverride());
 
 // Configuración de Passport. Lo inicializamos
 // y le indicamos que Passport maneje la Sesión
@@ -81,6 +88,14 @@ app.get('/auth/facebook/callback', passport.authenticate('facebook',
 app.get('/auth/google/callback', passport.authenticate( 'google',
   { successRedirect: '/', failureRedirect: '/login' }
 ));
+
+// API
+var GastoR = express.Router();
+GastoR.route('/gastos')
+    .get(GastoCtrl.findAllGastos)
+    .post(GastoCtrl.addGasto);
+
+app.use('/api', GastoR);
 
 // Inicio del servidor
 app.listen(app.get('port'), function(){
