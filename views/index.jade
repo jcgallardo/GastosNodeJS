@@ -32,7 +32,7 @@ block content
 		h1(class='saludo') Encantados de tenerte de nuevo #{user.name.split(" ")[0]}
 		p(class='saludo') Ahora dinos, ¿qué gasto deseas anotar?
 		div(class='container cont-form')
-			form(action='/',method='post',role='form')
+			form(action='/api/gastos',method='post',role='form')
 				div(class='form-group')
 					div(class='row')
 						div(class='col-xs-12 col-md-12')

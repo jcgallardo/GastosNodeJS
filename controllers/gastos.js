@@ -12,12 +12,12 @@ exports.findAllGastos = function(req, res) {
 };
 exports.addGasto = function(req, res) {
     console.log('POST');
-    console.log(req.body);
-
+    //console.log(req.body);
+    //console.log(req.session);
     var gasto = new Gasto({
-        //provider_id:    req.user.name, --> necesito el usuario
+        provider_id:    req.user.provider_id,
         descripcion:     req.body.descripcion,
-        //fecha:  req.body.fecha, // --> necesito una fecha válida
+        fecha:  req.body.fecha,
         categoria:   req.body.categoria,
         importe:  req.body.importe
     });

@@ -16,7 +16,9 @@ require('./passport')(passport);
 
 // importamos los controladores para la API
 require('./models/gasto');
+require('./models/categoria');
 var GastoCtrl = require('./controllers/gastos');
+var CategoriaCtrl = require('./controllers/categorias');
 
 // Conexión a la base de datos de MongoDB que tenemos en local
 mongoose.connect('mongodb://localhost:27017/gastos', function(err, res) {
@@ -72,9 +74,9 @@ app.get('/auth/facebook', passport.authenticate('facebook', { scope: 'email'}));
 app.get('/auth/google', passport.authenticate('google', {
      scope:[ 'https://www.googleapis.com/auth/plus.login',
       'https://www.googleapis.com/auth/plus.profile.emails.read' ]
-}));
 // Ruta de callback, a la que redirigirá tras autenticarse con Twitter.
 // En caso de fallo redirige a otra vista '/login'
+}));
 app.get('/auth/twitter/callback', passport.authenticate('twitter',
   { successRedirect: '/', failureRedirect: '/login' }
 ));
@@ -90,12 +92,15 @@ app.get('/auth/google/callback', passport.authenticate( 'google',
 ));
 
 // API
-var GastoR = express.Router();
-GastoR.route('/gastos')
+var router = express.Router();
+router.route('/gastos')
     .get(GastoCtrl.findAllGastos)
     .post(GastoCtrl.addGasto);
 
-app.use('/api', GastoR);
+router.route('/categorias')
+    .get(CategoriaCtrl.findAllCategorias)
+
+app.use('/api', router);
 
 // Inicio del servidor
 app.listen(app.get('port'), function(){
