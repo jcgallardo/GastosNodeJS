@@ -5,15 +5,15 @@ class Gasto{
         this.fecha = fecha;
         this.importe = importe;
     }
-}
+};
 
 class VistaGasto{
     static printGasto(gasto){
-        let div_cont = $("<div>");
+        var div_cont = $("<div>");
         div_cont.addClass("row cont-gasto");
-        let div_icono = $("<div>");
+        var div_icono = $("<div>");
         div_icono.addClass("columna-icono col-xs-12 col-md-3");
-        let div_cuerpo = $("<div>");
+        var div_cuerpo = $("<div>");
         div_cuerpo.addClass("columna-cuerpo col-xs-12 col-md-9");
         div_cuerpo.html(gasto.descripcion);
         div_cont.append(div_icono);
@@ -21,15 +21,15 @@ class VistaGasto{
 
         return div_cont;
     }
-}
+};
 
 $(document).ready(function(){
     $("#b-guardar").click(function(){
         // cogemos los datos y los validamos
-        let descripcion = $("#desc-gasto").val();
-        let categoria = $("#cat-gasto").val();
-        let fecha = $("#fecha-gasto").val();
-        let importe = $("#importe-gasto").val();
+        var descripcion = $("#desc-gasto").val();
+        var categoria = $("#cat-gasto").val();
+        var fecha = $("#fecha-gasto").val();
+        var importe = $("#importe-gasto").val();
 
         $.ajax({
             method: "POST",
