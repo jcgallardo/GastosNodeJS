@@ -1,57 +1,58 @@
 extends layout
 
 block content
-	if (!user)
-		div(class='div-fondo')
-			h1(class='titulo') Expensy
-			h2(class='subtitulo') Tu nueva aplicación para controlar tus gastos
-			div(class="cont-login")
-				h2 Sabemos que no quieres más contraseñas
-				p Por eso te lo ponemos más fácil
-					ul(class='lista-inicio-sesion')
-						li
-							a(href='auth/google', class='btn btn-block btn-social btn-google') Accede con Google
-								span(class='fa fa-google')
-		div(class='cont-publicidad container')
-			h2 Con Expensy, todo son ventajas
-			div(class='row')
-				div(class='col-sm-4 publicidad')
-					h3 Un nuevo gasto en pocos segundos
-					p Introduce una descripción, una fecha, una categoría y el importe. ¡Ya está! De todo lo demás nos encargamos nosotros.
-					p Y no te preocupes si te has equivocado en algún dato, ¡los puedes modificar siempre que quieras!
-				div(class='col-sm-4 publicidad')
-					h3 Visualízalos como mejor prefieras.
-					p ¿Te gusta más en modo lista, o te aclaras mejor con gráficos?.
-					p ¿Quieres ordenar por categoría, o te interesa mes concreto?.
-					p Da igual como sea, con esta aplicación podrás ver tus gastos de todas las maneras que se te ocurran. Y si se te ocurre alguna más, ¡cuéntanosla!.
-				div(class='col-sm-4 publicidad')
-					h3 Ningún tipo de coste ni anuncios pesados
-					p Puedes utilizar esta aplicación sin ninguna preocupación. Tus datos estarán bien guardados y es completamente GRATIS.
-					p Además no nos gusta la publicidad intrusiva, ¡por eso no la vas a tener!
-	else
-		h1(class='saludo') Encantados de tenerte de nuevo #{user.name.split(" ")[0]}
-		p(class='saludo') Ahora dinos, ¿qué gasto deseas anotar?
-		div(class='container cont-form')
-			form(action='/api/gastos',method='post',role='form')
-				div(class='form-group')
-					div(class='row')
-						div(class='col-xs-12 col-md-12')
-							label(for='desc-gasto') Describe brevemente el gasto
-							input(id='desc-gasto',name='descripcion', placeholder='Ejemplo: compra semanal en Mercadona',class='form-control')
-				div(class='form-group')
-					div(class='row')
-						div(class='col-xs-12 col-md-4')
-							div(class='form-group')
-								label(for='cat-gasto') Asígnale una categoría
-								select(id='cat-gasto',name='categoria', class='select-categoria form-control')
-									option Sin categoría
-						div(class='col-xs-6 col-md-4')
-							label(for='fecha-gasto') ¿Cuándo ocurrió?
-							input(id='fecha-gasto', name='fecha', type='date', class='form-control', placeholder='Fecha')
-						div(class='col-xs-6 col-md-4')
-							label(for='importe-gasto') ¿Qué importe tiene?
-							input(id='importe-gasto', name='importe',class='form-control',placeholder='Importe (Ejemplo: 17,99)')
-				div(class='form-group')
-					div(class='row fila-boton')
-						div(class='col-xs-12 col-md-12')
-							button(type='submit',class='btn btn-warning btn-lg btn-nuevo', name='b-nuevo', value='nuevo') Guardar gasto
+    if (!user)
+        div(class='div-fondo')
+            h1(class='titulo') Expensy
+            h2(class='subtitulo') Tu nueva aplicación para controlar tus gastos
+            div(class="cont-login")
+                h2 Sabemos que no quieres más contraseñas
+                p Por eso te lo ponemos más fácil
+                    ul(class='lista-inicio-sesion')
+                        li
+                            a(href='auth/google', class='btn btn-block btn-social btn-google') Accede con Google
+                                span(class='fa fa-google')
+        div(class='cont-publicidad container')
+            h2 Con Expensy, todo son ventajas
+            div(class='row')
+                div(class='col-sm-4 publicidad')
+                    h3 Un nuevo gasto en pocos segundos
+                    p Introduce una descripción, una fecha, una categoría y el importe. ¡Ya está! De todo lo demás nos encargamos nosotros.
+                    p Y no te preocupes si te has equivocado en algún dato, ¡los puedes modificar siempre que quieras!
+                div(class='col-sm-4 publicidad')
+                    h3 Visualízalos como mejor prefieras.
+                    p ¿Te gusta más en modo lista, o te aclaras mejor con gráficos?.
+                    p ¿Quieres ordenar por categoría, o te interesa mes concreto?.
+                    p Da igual como sea, con esta aplicación podrás ver tus gastos de todas las maneras que se te ocurran. Y si se te ocurre alguna más, ¡cuéntanosla!.
+                div(class='col-sm-4 publicidad')
+                    h3 Ningún tipo de coste ni anuncios pesados
+                    p Puedes utilizar esta aplicación sin ninguna preocupación. Tus datos estarán bien guardados y es completamente GRATIS.
+                    p Además no nos gusta la publicidad intrusiva, ¡por eso no la vas a tener!
+    else
+        h1(class='saludo') Encantados de tenerte de nuevo #{user.name.split(" ")[0]}
+        p(class='saludo') Ahora dinos, ¿qué gasto deseas anotar?
+        div(class='container cont-form')
+            form(action='/api/gastos',method='post',role='form')
+                div(class='form-group')
+                    div(class='row')
+                        div(class='col-xs-12 col-md-12')
+                            label(for='desc-gasto') Describe brevemente el gasto
+                            input(id='desc-gasto',name='descripcion', placeholder='Ejemplo: compra semanal en Mercadona',class='form-control')
+                div(class='form-group')
+                    div(class='row')
+                        div(class='col-xs-12 col-md-4')
+                            div(class='form-group')
+                                label(for='cat-gasto') Asígnale una categoría
+                                select(id='cat-gasto',name='categoria', class='select-categoria form-control')
+                                    each cat in categorias
+                                        option=cat.name
+                        div(class='col-xs-6 col-md-4')
+                            label(for='fecha-gasto') ¿Cuándo ocurrió?
+                            input(id='fecha-gasto', name='fecha', type='date', class='form-control', placeholder='Fecha')
+                        div(class='col-xs-6 col-md-4')
+                            label(for='importe-gasto') ¿Qué importe tiene?
+                            input(id='importe-gasto', name='importe',class='form-control',placeholder='Importe (Ejemplo: 17,99)')
+                div(class='form-group')
+                    div(class='row fila-boton')
+                        div(class='col-xs-12 col-md-12')
+                            button(type='submit',class='btn btn-warning btn-lg btn-nuevo', name='b-nuevo', value='nuevo') Guardar gasto
