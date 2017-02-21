@@ -1,2 +1,2 @@
 # GastosNodeJS
-Aplicación web para gestionar los gastos de cada usuario. Utiliza la tecnología MEAN Stack, es decir, MongoDB y NodeJS.
+Aplicación web implementada en MEAN Stack (MongoDB y NodeJS con el framework Express)  para gestionar los gastos asociados a un usuario. Un usuario, identificado por Google, podrá almacenar todos sus gastos para poder visualizar y controlar en forma de tabla o gráfica todos sus gastos.
