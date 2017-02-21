@@ -13,9 +13,26 @@ class VistaGasto{
         div_cont.addClass("row cont-gasto");
         var div_icono = $("<div>");
         div_icono.addClass("columna-icono col-xs-12 col-md-3");
+        div_icono.append("<p>"+gasto.categoria[0]+gasto.categoria[1]+"</p>");
         var div_cuerpo = $("<div>");
         div_cuerpo.addClass("columna-cuerpo col-xs-12 col-md-9");
-        div_cuerpo.html(gasto.descripcion);
+        var div_descripcion = $("<div>");
+        div_descripcion.addClass("cont-descripcion");
+        div_descripcion.append("<span class='strong'>Descripcion: </span>");
+        div_descripcion.append("<p>"+gasto.descripcion+"</p>");
+        var div_footer = $("<div>");
+        div_footer.addClass("row gato-footer");
+        var div_fecha = $("<div>");
+        var div_importe = $("<div>");
+        div_fecha.addClass("col-md-6");
+        div_importe.addClass("col-md-6");
+        var fecha = new Date(gasto.fecha);
+        div_fecha.append("<p class='fecha'>Insertado el "+fecha.toLocaleDateString()+" </p>");
+        div_importe.append("<p class='precio'>"+gasto.importe.toFixed(2)+"&euro;</p>");
+        div_footer.append(div_fecha);
+        div_footer.append(div_importe);
+        div_cuerpo.append(div_descripcion);
+        div_cuerpo.append(div_footer);
         div_cont.append(div_icono);
         div_cont.append(div_cuerpo);
 
@@ -50,7 +67,8 @@ $(document).ready(function(){
                     $("#myModal").modal();
                 },
                 200: function(msg){
-                    $("#titulo-modal").html("¡ENHORABUENA! Tu gasto se ha podido guardar correctamente");
+                    $("#titulo-modal").html("¡ENHORABUENA!");
+                    $("#titulo-modal-2").html("Estos son los gastos que has insertado hoy");
                     gasto = new Gasto(msg.descripcion, msg.categoria, msg.fecha, msg.importe);
 
                     $("#cuerpo-modal").append(VistaGasto.printGasto(gasto));

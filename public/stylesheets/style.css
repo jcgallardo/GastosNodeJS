@@ -153,3 +153,85 @@ p.saludo{
 	margin-left: 15%;
 	margin-bottom:80px;
 }
+.strong{
+	font-weight: 700;
+	margin-right: 10px;
+    color:#333333;
+    font-size: 1.1em;
+    text-shadow: rgba(0,0,0,0.5);
+}
+.columna-icono{
+    text-align: center;
+}
+.columna-icono > p{
+	border-radius: 50%;
+	background-color: darkseagreen;
+	box-shadow: 1px 1px 5px 1px rgba(0,0,0,0.2);
+    padding:25px;
+    font-size: 1.2em;
+    font-family: "DejaVu Sans";
+    text-transform: uppercase;
+    margin:auto;
+    margin-top:40px;
+    text-align: center;
+    display: inline-block;
+    color: white !important;
+    text-shadow: 1px 1px 2px black;
+}
+#cuerpo-modal{
+    width: 90%;
+    margin:auto;
+}
+.cont-gasto{
+    background-color: #FF8A65;
+    margin:20px auto;
+    box-shadow: 0 1px 5px 1px rgba(0,0,0,0.5);
+    padding-top: 20px;
+}
+.cont-descripcion p{
+    padding-top: 10px;
+    color: #EEE;
+    font-size: 1.3em;
+    line-height: 1.5em;
+}
+.precio{
+    font-size: 3em;
+    color:white;
+    text-shadow: 1px 1px 1px #b94630;
+}
+.fecha{
+    line-height: 5em;
+    vertical-align: middle;
+    color:white;
+}
+.gasto-footer{
+    margin-top:-10px;
+}
+.modal-header h4{
+    text-align: center;
+    font-size: 2.5em;
+    padding: 5px 0;
+}
+.modal-header h5{
+    font-size: 1.5em;
+    padding: 5px 40px;
+    color: #305777;
+    text-align: center;
+}
+select option{
+    text-transform: capitalize;
+}
+#articulo_formulario{
+    padding:50px;
+}
+/************************************* Articulo etiquetas ***********/
+#articulo_etiquetas{
+    background-color: #E57373;
+    padding: 80px;
+}
+input{
+    font-weight:100 !important;
+}
+#b-etiquetas{
+    margin-top: 1.7em;
+}
