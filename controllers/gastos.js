@@ -3,11 +3,37 @@ var Gasto  = mongoose.model('Gasto');
 
 //GET - Return all gastos in the DB
 exports.findAllGastos = function(req, res) {
-    Gasto.find(function(err, gastos) {
-        if(err) res.send(500, err.message);
+    var desde = req.query.desde;
+    var hasta = req.query.hasta;
+    var categoria = req.query.categoria;
 
-        console.log('GET /gasto')
-            res.status(200).jsonp(gastos);
+    var data = {"provider_id":req.user.provider_id};
+
+    if(desde != ""){
+        if (hasta != ""){
+            if (categoria != ""){
+                data = {"fecha" : {"$gte" : desde, "$lte" : hasta}, "categoria" : categoria};
+            }else{
+                data = {"fecha" : {"$gte" : desde, "$lte" : hasta}}
+            }
+        }else if(categoria != ""){
+            data = {"fecha" : {"$gte" : desde}, "categoria" : categoria};
+        }else{
+            data = {"fecha" : {"$gte" : desde}};
+        }
+    }else if(hasta != ""){
+        if (categoria != ""){
+            data = {"fecha" : {"$lte" : hasta}, "categoria" : categoria};
+        }else{
+            data = {"fecha" : {"$lte" : hasta}}
+        }
+    }else if(categoria != ""){
+        data = {"categoria" : categoria};
+    }
+    Gasto.find(data,function(err, gastos) {
+        if(err) res.send(500, err.message);
+        console.log('GET /gasto');
+        res.status(200).jsonp(gastos);
     });
 };
 exports.addGasto = function(req, res) {

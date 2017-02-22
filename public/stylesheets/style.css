@@ -165,14 +165,14 @@ p.saludo{
 }
 .columna-icono > p{
 	border-radius: 50%;
-	background-color: darkseagreen;
+	background-color: dimgray;
 	box-shadow: 1px 1px 5px 1px rgba(0,0,0,0.2);
     padding:25px;
     font-size: 1.2em;
     font-family: "DejaVu Sans";
     text-transform: uppercase;
     margin:auto;
-    margin-top:40px;
+    margin-top:10px;
     text-align: center;
     display: inline-block;
     color: white !important;
@@ -183,10 +183,13 @@ p.saludo{
     margin:auto;
 }
 .cont-gasto{
-    background-color: #FF8A65;
+    background-image: linear-gradient(to bottom,#f0ad4e 0,#eb9316 100%);
+	background-color: #f0ad4e;
     margin:20px auto;
     box-shadow: 0 1px 5px 1px rgba(0,0,0,0.5);
     padding-top: 20px;
+	margin-right: 0 !important;
+	margin-left: 0 !important;
 }
 .cont-descripcion p{
     padding-top: 10px;
@@ -195,14 +198,13 @@ p.saludo{
     line-height: 1.5em;
 }
 .precio{
-    font-size: 3em;
+    font-size: 2em;
     color:white;
     text-shadow: 1px 1px 1px #b94630;
 }
 .fecha{
-    line-height: 5em;
+    line-height: 3em;
     vertical-align: middle;
-    color:white;
 }
 .gasto-footer{
     margin-top:-10px;
@@ -224,14 +226,29 @@ select option{
 #articulo_formulario{
     padding:50px;
 }
-/************************************* Articulo etiquetas ***********/
+/************************************* Artículo etiquetas ***********/
 #articulo_etiquetas{
-    background-color: #E57373;
+    background-color: #eeeeee;
     padding: 80px;
+}
+#articulo_etiquetas h2{
+	font-size: 3em;
+	text-align: center;
+}
+#articulo_etiquetas h3{
+	text-align: center;
+	color:#888888;
+	margin-bottom: 40px;
 }
 input{
     font-weight:100 !important;
 }
 #b-etiquetas{
     margin-top: 1.7em;
+}
+.info_input{
+	margin-top: 10px;
+	font-size: 0.8em;
+	color: dodgerblue;
+	padding-left: 10px;
 }

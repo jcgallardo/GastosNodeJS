@@ -69,6 +69,8 @@ block content
                             div(class='col-xs-12 col-md-12')
                                 button(type='button',id='b-guardar' class='btn btn-warning btn-lg btn-nuevo', name='b-nuevo', value='nuevo') Guardar gasto
         article(id='articulo_etiquetas')
+            h2 Consulta tus gastos en modo etiquetas.
+            h3 ¡Modíficalas o elimínalas a tu gusto!
             div(id='form_ver_etiquetas')
                 div(class='container')
                     form(action='/api/gastos',method='get',role='form')
@@ -77,18 +79,21 @@ block content
                                 div(class='col-xs-12 col-md-3')
                                     label(for='fec_desde') Fecha inicio
                                     input(type='date' id='fec_desde', name='fec_desde',class='form-control')
+                                    p(class='info_input') Sin establecer para "desde origen de los tiempos"
                                 div(class='col-xs-12 col-md-3')
                                     label(for='fec_hasta') Fecha fin
                                     input(type='date' id='fec_hasta', name='fec_hasta',class='form-control')
+                                    p(class='info_input') Sin establecer para "hasta actualidad"
                                 div(class='col-xs-12 col-md-3')
                                     label(for='select_cat') Categoria
                                     select(id='select_cat', name='select_cat',class='form-control')
-                                        option(value=null) Todas
+                                        option
                                         each cat in categorias
                                             option(value=cat.name)=cat.name
+                                    p(class='info_input') Sin establecer para "todas las categorías"
                                 div(class='col-xs-12 col-md-3')
                                     button(type='button',id='b-etiquetas' class='btn btn-primary btn-nuevo', name='etiquetas', value='etiquetas') Ver gastos
-            div(id='contenedor_etiquetas')
+            div(id='contenedor_etiquetas',class='container')
         article(id='articulo_graficos')
             button(type='button',id='b-grafico-1' class='btn btn-primary btn-lg btn-grafico', name='b-grafico-1', value='grafico-1') Ver gráfico 1
             button(type='button',id='b-grafico-2' class='btn btn-primary btn-lg btn-grafico', name='b-grafico-2', value='grafico-2') Ver gráfico 2
