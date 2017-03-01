@@ -62,3 +62,16 @@ exports.addGasto = function(req, res) {
         res.status(201).jsonp({error: "Campos obligatorios"});
     }
 };
+
+exports.findMensual = function(req,res) {
+    console.log('GET');
+    var provider_id = req.user.provider_id;
+
+    if (provider_id != null && provider_id != ""){
+        data = {"provider_id" : provider_id};
+        Gasto.aggregate([{$match : data} ,{"$group" : {_id:"$categoria", y:{$sum:"$importe"}}}], function(err, resultado){
+            if (err) return res.status(500).send(err.message);
+            res.status(200).jsonp(resultado);
+        });
+    }
+};

@@ -40,7 +40,7 @@ block content
                         div(id='cuerpo-modal')
                     div(class='modal-footer')
                         button(type='button',class='btn btn-default',data-dismiss='modal') Cerrar
-        article(id='articulo_formulario')
+        section(id='articulo_formulario')
             h1(class='saludo') Encantados de tenerte de nuevo #{user.name.split(" ")[0]}
             p(class='saludo') Ahora dinos, ¿qué gasto deseas anotar?
             div(class='container cont-form')
@@ -68,7 +68,7 @@ block content
                         div(class='row fila-boton')
                             div(class='col-xs-12 col-md-12')
                                 button(type='button',id='b-guardar' class='btn btn-warning btn-lg btn-nuevo', name='b-nuevo', value='nuevo') Guardar gasto
-        article(id='articulo_etiquetas')
+        section(id='articulo_etiquetas')
             h2 Consulta tus gastos en modo etiquetas.
             h3 ¡Modíficalas o elimínalas a tu gusto!
             div(id='form_ver_etiquetas')
@@ -94,7 +94,15 @@ block content
                                 div(class='col-xs-12 col-md-3')
                                     button(type='button',id='b-etiquetas' class='btn btn-primary btn-nuevo', name='etiquetas', value='etiquetas') Ver gastos
             div(id='contenedor_etiquetas',class='container')
-        article(id='articulo_graficos')
-            button(type='button',id='b-grafico-1' class='btn btn-primary btn-lg btn-grafico', name='b-grafico-1', value='grafico-1') Ver gráfico 1
-            button(type='button',id='b-grafico-2' class='btn btn-primary btn-lg btn-grafico', name='b-grafico-2', value='grafico-2') Ver gráfico 2
-            button(type='button',id='b-grafico-3' class='btn btn-primary btn-lg btn-grafico', name='b-grafico-3', value='grafico-3') Ver gráfico 3
+        section(id='articulo_graficos')
+            article(class='art-grafico-mensual')
+                h2 Gráfico mensual
+                button(type='button',id='b-g-mensual' class='btn btn-primary btn-mensual', name='mensual', value='mensual') Ver gráfico mensual
+                div(id='cont-graf-mensual')
+            article(class='art-grafico-anual')
+                h2 Gráfico anual
+                div(id='cont-form-anual')
+            article(class='art-grafico-all')
+                h2 Gráfico desde el inicio de los tiempos
+                div(id='cont-form-all')
+

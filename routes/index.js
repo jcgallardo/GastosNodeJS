@@ -7,5 +7,4 @@ exports.index = function(req, res){
     Categoria.find().exec(function (err, categorias) {
         res.render('index', { title: 'Expensy', user: req.user, categorias: categorias });
     });
-
 };
