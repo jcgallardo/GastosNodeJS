@@ -26,7 +26,7 @@ class VistaGasto{
         div_fecha.addClass("col-md-6 col-xs-6 col-sm-6");
         div_importe.addClass("col-md-6 col-xs-6 col-sm-6");
         var fecha = new Date(gasto.fecha);
-        div_fecha.append("<p class='fecha'>Insertado el "+fecha.toLocaleDateString()+" </p>");
+        div_fecha.append("<p class='fecha'>"+fecha.toLocaleDateString()+" </p>");
         div_importe.append("<p class='precio'>"+gasto.importe.toFixed(2)+"&euro;</p>");
         div_footer.append(div_fecha);
         div_footer.append(div_importe);
@@ -64,11 +64,62 @@ class VistaGastos{
                 }
                 cont.append(row);
             }else {
-                cont.append(VistaGasto.printGasto(gastos[i]));
+                cont.prepend(VistaGasto.printGasto(gastos[i]));
             }
         }
         return cont;
     }
+}
+
+function graficoMensual(data){
+    // Gráfico
+    Highcharts.getOptions().colors = Highcharts.map(Highcharts.getOptions().colors, function (color) {
+        return {
+            radialGradient: {
+                cx: 0.5,
+                cy: 0.3,
+                r: 0.7
+            },
+            stops: [
+                [0, color],
+                [1, Highcharts.Color(color).brighten(-0.3).get('rgb')] // darken
+            ]
+        };
+    });
+
+    // Build the chart
+    Highcharts.chart('cont-graf-mensual', {
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false,
+            type: 'pie'
+        },
+        title: {
+            text: 'Gasto mensual por categorías'
+        },
+        tooltip: {
+            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: true,
+                    format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                    style: {
+                        color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                    },
+                    connectorColor: 'silver'
+                }
+            }
+        },
+        series: [{
+            name: 'Brands',
+            data: data
+        }]
+    });
 }
 
 $(document).ready(function(){
@@ -102,7 +153,7 @@ $(document).ready(function(){
                     $("#titulo-modal-2").html("Estos son los gastos que has insertado hoy");
                     gasto = new Gasto(msg.descripcion, msg.categoria, msg.fecha, msg.importe);
 
-                    $("#cuerpo-modal").append(VistaGasto.printGasto(gasto));
+                    $("#cuerpo-modal").prepend(VistaGasto.printGasto(gasto));
                     $("#myModal").modal();
                 }
             }
@@ -139,4 +190,35 @@ $(document).ready(function(){
             }
         });
     });
+
+    $("#b-g-mensual").click(function () {
+        $.ajax({
+            method: "GET",
+            url: "/api/gastos/mensual",
+            statusCode: {
+                404: function(){
+                    alert("Página no encontrada");
+                },
+                201: function(msg){
+                    $("#cont-form-mensual").append("<h3>ERROR 201</h3>");
+                    $("#cont-form-mensual").html("<p>"+msg.error+"</p>");
+                },
+                200: function(msg){
+                    $("#cont-form-mensual").html("");
+                    var arreglado = msg.map( item => {
+                        // lo guardas temporalmente
+                        var temporal = item._id;
+                        // eliminas el valor que ya no quieres
+                        delete item._id;
+                        // creas el valor nuevo.
+                        item.name = temporal;
+                        return item;
+                    });
+                    graficoMensual(arreglado);
+                }
+            }
+        });
+    });
+
+
 });

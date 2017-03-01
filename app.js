@@ -97,6 +97,9 @@ router.route('/gastos')
     .get(GastoCtrl.findAllGastos)
     .post(GastoCtrl.addGasto);
 
+router.route('/gastos/mensual')
+    .get(GastoCtrl.findMensual);
+
 router.route('/categorias')
     .get(CategoriaCtrl.findAllCategorias)
 
